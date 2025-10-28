@@ -71,6 +71,26 @@ app.post('/fetch', async (req, res) => {
     }
 });
 
+// Fetch all occupied seats for a room
+app.post('/fetchall', async (req, res) => {
+    try {
+        const { room_number } = req.body;
+        
+        // Find all seats in the room that are not vacant
+        const occupiedSeats = await Seat.find({ 
+            room_number: room_number, 
+            is_vacant: false 
+        }).select('seat_number -_id'); // Only return seat_number, exclude _id
+        
+        // Extract just the seat numbers into an array
+        const occupiedSeatNumbers = occupiedSeats.map(seat => seat.seat_number);
+
+        res.json({ occupied_seats: occupiedSeatNumbers });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
