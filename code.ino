@@ -1,9 +1,10 @@
 #include <WiFi.h>
+#include <WiFiClientSecure.h>
 #include <HTTPClient.h>
 
 // ==== WiFi Credentials ====
-const char* ssid = "REPLACE_WITH_YOUR_SSID";
-const char* password = "REPLACE_WITH_YOUR_PASSWORD";
+const char* ssid = "Aayush's S24 FE";
+const char* password = "aayush_bg";
 
 // ==== Force Sensor Pin ====
 #define FORCE_SENSOR_PIN 36  // GPIO36 (ADC0)
